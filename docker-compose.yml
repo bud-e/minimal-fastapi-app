@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  minimal-fastapi-app:
+    build:
+      context: ../minimal-fastapi-app
+    container_name: minimal-fastapi-app
+    image: minimal-fastapi-app
+    working_dir: /opt/minimal-fastapi-app
+    env_file:
+      - .env
+    volumes:
+      - .:/opt/minimal-fastapi-app
+      - app_logs:/var/log/*.log
+    ports:
+      - 8000:8000
+    networks:
+      - network_private
+
+networks:
+  network_private:
+    driver: bridge
+
+volumes:
+  app_logs:
